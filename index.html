@@ -59,14 +59,15 @@
 
             <figure class="slide-picture  slide-active first-picture margin-auto flex absolute">
                 <img src="./assets/images/slider1.jpg" alt="réservation de vélo">
-                <p class="bck-tulipier color-casal font-size16 text-align-center">Réservez<br>votre vélo<br>en quelques clics
+                <p class="bck-tulipier color-casal font-size16 text-align-center">Réservez<br>votre vélo<br>en quelques
+                    clics
                 </p>
             </figure>
 
             <figure class="slide-picture second-picture margin-auto flex absolute">
                 <img src="./assets/images/slider2.PNG" alt="Choix de la station">
                 <p class="bck-tulipier color-casal font-size16 text-align-center">Choisissez <br>votre<br> station<br>
-                <a class="color-casal" href="#anchor">Infos<br></a></p>  
+                    <a class="color-casal" href="#anchor">Infos<br></a></p>
             </figure>
 
             <figure class="slide-picture third-picture margin-auto flex absolute">
@@ -76,17 +77,19 @@
 
             <figure class="slide-picture fourth-picture margin-auto flex absolute">
                 <img src="./assets/images/slider4.jpg" alt="Sablier">
-                <p class="bck-tulipier color-casal font-size16 text-align-center">Votre vélo<br>vous attends<br>20 minutes<br>à la station choisie</p>
+                <p class="bck-tulipier color-casal font-size16 text-align-center">Votre vélo<br>vous attends<br>20
+                    minutes<br>à la station choisie</p>
             </figure>
 
             <figure class="slide-picture last-picture margin-auto flex absolute">
                 <img src="./assets/images/slider5.jpg" alt="C'est parti">
-                <p class="bck-tulipier color-casal font-size16 text-align-center">Et c'est parti !<br> <i class="fas fa-bicycle color-toscane"></i></p> 
+                <p class="bck-tulipier color-casal font-size16 text-align-center">Et c'est parti !<br> <i
+                        class="fas fa-bicycle color-toscane"></i></p>
             </figure>
         </div>
-    
+
         <!--Button Slider -->
-        <div class="button-slider flex margin-auto">
+        <div class="button-slider flex margin-auto align-items-center">
             <div id="previous" class="color-toscane font-size34" onclick="slider.changeSlidePrevious()">
                 <i class="fas fa-chevron-circle-left"></i>
             </div>
@@ -109,63 +112,95 @@
 
     <!------------------- Part Infos Station--------------------->
     <div id="anchor" class="part-infos">
-            <h2 class="text-align-center">Infos Station</h2> 
+        <h2 class="text-align-center">Infos Station</h2>
 
-            <ul>
-            <li><img src="./assets/images/marker_red.png" alt="marqueur rouge">Station fermée</li>
-            <li><img src="./assets/images/marker_green.png" alt="Marqueur Vert">Vélos et Places disponibles</li>
-            <li><img src="./assets/images/marker_blue.png" alt="Marqueur bleu">Vélos disponibles 0 Places libres</li>
-            <li><img src="./assets/images/marker_orange.png" alt="Marqueur orange">Places libres 0 vélos disponibles</li>
+        <ul>
+            <li class="flex width100">
+                <img src="./assets/images/marker_red.png" alt="marqueur rouge">
+                <p class="font-size18">Station fermée</p>
+            </li>
+            <li class="flex">
+                <img src="./assets/images/marker_green.png" alt="Marqueur Vert">
+                <p class="font-size18">Vélos et Places disponibles</p>
+            </li>
+            <li class="flex">
+                <img src="./assets/images/marker_blue.png" alt="Marqueur bleu">
+                <p class="font-size18">Vélos disponibles 0 Places libres</p>
+            </li>
+            <li class="flex">
+                <img src="./assets/images/marker_orange.png" alt="Marqueur orange">
+                <p class="font-size18">Places libres 0 vélos disponibles</p>
+            </li>
         </ul>
     </div>
     <!------------------- End Part Infos Station----------------->
 
+    <div id="content-map-form-canvas">
+        <!------------------------- Part Map ----------------------->
+        <div class="part-map width100 bck-tulipier">
 
-    <!------------------------- Part Map ----------------------->
-    <div class="part-map width100 bck-tulipier">
-
-        <div id="mapid" class="margin-auto">
+            <div id="mapid" class="margin-auto">
+            </div>
         </div>
-    </div>
-    <!------------------------- End Part Map ----------------------->
+        <!------------------------- End Part Map ----------------------->
 
 
-    <!------------------------- Part Form -------------------------->
-    <div class="part-form">
-        <form id='form' class="none">
-            <div>
-                <input type="text" id="name" placeholder="Nom" required>
+        <!------------------------- Part Form -------------------------->
+        <div id="part-form" class="text-align-center">
+            <div id="details-station" class="none">
+                <h2>Détails de la station</h2>
+                <p>Station</p>
+                <p id="name-station"></p>
+                <p>Adresse</p>
+                <p id="address"></p>
+                <p>Etat</p>
+                <p id="statut"></p>
+                <p>Nombre de vélos disponibles</p>
+                <p id="dispo-bikes"></p>
+                <p>Nombre de places disponibles</p>
+                <p id="stands-bikes"></p>
             </div>
-            <div>
-                <input type="text" id="surname" placeholder="Prénom" required>
-            </div>
-            <div>
-                <input type="submit" id="button" class="bck-toscane color-white" value="Signature">
-            </div>
-        </form>
-    </div>
-    <!------------------------- End Part Form ------------------------->
-
-
-    <!------------------------- Part Canvas  -------------------------->
-    <div id="canvas-form" class="width100 none">
-        <canvas id="canvas" class="margin-auto"></canvas>
-
-       <!--Button Canvas -->
-        <div id="buttons-canvas" class="width100 none">
-            <button type="submit" id="submit" class="bck-toscane color-white">Valider</button>
-            <button type="submit" id="retry" class="bck-toscane color-white">Recommencer</button>
+            <form id='form' class="align-items-center">
+                <div id="client-info" class="none text-align-center opacity0">
+                    <div>
+                        <input type="text" name="Nom" id="name" placeholder="Nom" required>
+                    </div>
+                    <div>
+                        <input name="Prénom" type="text" id="surname" placeholder="Prénom" required>
+                    </div>
+                    <div>
+                        <input type="submit" class="bck-toscane color-white" value="Valider">
+                    </div>
+                </div>
+            </form>
+            <p id="existing-reservation" class="none text-align-center">Une réservation est déjà en cours, merci d'annuler la précédente</p>
         </div>
-    </div>
-    <!------------------------- End Part Canvas ------------------------>
+        <!------------------------- End Part Form ------------------------->
 
+
+        <!------------------------- Part Canvas  -------------------------->
+        <div id="canvas-form" class="width100 none flex opacity0">
+            <h2 class="margin-auto">Signature</h2>
+            <canvas id="canvas" class="margin-auto"></canvas>
+
+            <!--Button Canvas -->
+            <div id="buttons-canvas" class="width100 none">
+                <button type="submit" id="button-canvas" class="bck-toscane color-white">Valider</button>
+                <button type="submit" id="retry" class="bck-toscane color-white">Recommencer</button>
+            </div>
+        </div>
+        <!------------------------- End Part Canvas ------------------------>
+    </div>
 
     <!--------------------------  Part Timer  -------------------------->
-    <div id="timer" class="none">
-        <p class="width100 font-size18 text-align-center"><span id="dispo-time" class="font-size18"></span><br> à la station
+    <div id="timer" class="none opacity0">
+        <p class="width100 font-size18 text-align-center"><span id="dispo-time" class="font-size18"></span><br> à la
+            station
             : <span id="station-name" class="font-size18"></span><br> par <span id="name-reservation"></span> <span
                 id="surname-reservation"></span></p>
+        <button type="reset" id="reset-reservation" class="margin-auto">Annuler</button>
     </div>
+    <p id="reset-confirm" class="none text-align-center">Votre réservation a bien été annulée</p>
     <!------------------------- End Part Timer ------------------------->
 
 
@@ -198,8 +233,8 @@
         crossorigin=""></script>
     <script src="./assets/js/slider.js"></script>
     <script src="./assets/js/map.js"></script>
-    <script src="./assets/js/form.js"></script>
     <script src="./assets/js/canvas.js"></script>
+    <script src="./assets/js/form.js"></script>
     <script src="./assets/js/countdown.js"></script>
 </body>
 

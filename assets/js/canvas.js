@@ -1,12 +1,12 @@
 class Canvas {
     constructor(){
-        this.canvas = document.getElementById('canvas');
+        this.partForm = document.getElementById('part-form');
         this.canvasForm = document.getElementById('canvas-form');
+        this.canvas = document.getElementById('canvas');
         this.ctx = this.canvas.getContext('2d');
         this.buttonsCanvas = document.getElementById('buttons-canvas');
+        this.buttonSubmitCanvas = document.getElementById('button-canvas');
         this.clearButton = document.getElementById('retry');
-        this.submitButton = document.getElementById('submit');
-        this.form = document.getElementById('form');
         this.canvas.width = 250;
         this.canvas.height = 150;
         this.drawing = false;
@@ -42,17 +42,19 @@ class Canvas {
         });
 
         //lorsque l'on clique sur valider, les boutons disparaissent ainsi que le canvas
-        this.submitButton.addEventListener('click', () => {
+        this.buttonSubmitCanvas.addEventListener('click', () => {
             this.clear();
             this.setButtonsCanvas('0','none');
-            this.form.style.opacity = '0';
-            this.form.style.display = 'none';
+            this.partForm.style.opacity = '0';
+            this.partForm.style.display = 'none';
             this.canvasForm.style.opacity ='0';
             this.canvasForm.style.display = 'none';
         })
     };
 
     initPc (){
+
+        //lorsque l'on click avec la souris pour commencer à dessiner
         this.canvas.addEventListener('mousedown', e => {
             let positionMouse = this.getMousePosition(e);
             this.drawing=true;
@@ -60,6 +62,7 @@ class Canvas {
             this.ctx.moveTo(positionMouse.positionX, positionMouse.positionY);
         });
 
+        //lorsque l'on bouge la souris
         this.canvas.addEventListener('mousemove', e => {
             if (!this.drawing){
                 return
@@ -83,11 +86,11 @@ class Canvas {
         });
 
         //lorsque l'on clique sur valider, les boutons disparaissent ainsi que le canvas
-        this.submitButton.addEventListener('click', () => {
+        this.buttonSubmitCanvas.addEventListener('click', () => {
             this.clear();
             this.setButtonsCanvas('0','none');
-            this.form.style.opacity = '0';
-            this.form.style.display = 'none';
+            this.partForm.style.opacity = '0';
+            this.partForm.style.display = 'none';
             this.canvasForm.style.opacity ='0';
             this.canvasForm.style.display = 'none';
 
