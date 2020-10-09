@@ -2,13 +2,8 @@ class Reservation {
     constructor() {
         this.form = document.getElementById('form');
         this.partForm = document.getElementById('part-form');
-        console.log(this.partForm);
         this.name = document.getElementById('name');
         this.surname = document.getElementById('surname');
-        this.button = document.getElementById('button');
-        this.recupInfo = document.getElementById("info-reservation");
-        // this.nameReservation = document.getElementById("name-form-reservation");
-        // this.surnameReservation = document.getElementById('surname-form-reservation');
         this.canvasForm = document.getElementById('canvas-form');
         this.clientName = null;
         this.clientSurname = null;
@@ -30,24 +25,33 @@ class Reservation {
         }
 
         this.form.addEventListener('submit', e => {
-            e.preventDefault();
-            
-            this.canvasForm.style.opacity = '1';
-            this.canvasForm.style.display = 'flex';
-            this.partForm.style.display = 'none';
+            console.log('ok');
+            e.preventDefault(); 
+            this.setCanvasForm('1','flex');         
+            this.setPartForm('0','none');
             this.clientName = this.name.value;
             this.clientSurname = this.surname.value;
 
-            
-
-
             //créer localstorage à l'envoi du formulaire
-            localStorage.setItem('clientName', this.clientName);
-            localStorage.setItem('clientSurname', this.clientSurname);
+            this.setItemLocalStorage('clientName', this.clientName);
+            this.setItemLocalStorage('clientSurname',this.clientSurname)
             // Ici on ne connait pas le nom de la station, mais le nom et le prénom. Donc on envoie null, et nom et prénom
-            new Countdown(null, this.clientName, this.clientSurname).init();
+            new Countdown(this.stationName, this.clientName, this.clientSurname).init();
             
-        })
+        })   
+    }
+    setCanvasForm = (opacity, display) => {
+        this.canvasForm.style.opacity = opacity;
+        this.canvasForm.style.display = display;
+    }
+
+    setPartForm = (opacity, display) => {
+        this.partForm.style.opacity = opacity;
+        this.partForm.style.display = display;
+    }
+
+    setItemLocalStorage(key, value){
+        localStorage.setItem(`${key}`, value);
     }
 
     init(){

@@ -7,10 +7,9 @@ class LeafletMap {
     this.city = 'toulouse';
     this.marker = '';
     this.partForm = document.getElementById('part-form');
-    this.form = document.getElementById('form');
+    this.nameStation = document.getElementById('name-station');
     this.addressStation = document.getElementById('address');
     this.detailStation = document.getElementById('details-station');
-    this.nameStation = document.getElementById('name-station');
     this.statut = document.getElementById('statut');
     this.dispoBikes = document.getElementById('dispo-bikes');
     this.standsBikes = document.getElementById('stands-bikes');
@@ -30,15 +29,31 @@ class LeafletMap {
     }).addTo(this.map);
   }
 
-  /*Charger station */
+  setPartForm = (opacity, display) => {
+    this.partForm.style.opacity = opacity;
+    this.partForm.style.display = display;
+  }
 
+  setDetailStation = (display) => {
+    this.detailStation.style.display = display;
+  }
+
+  setResetConfirm = (display) => {
+    this.resetConfirm.style.display = display;
+  }
+
+  setClientInfo = (opacity, display) => {
+    this.clientInfo.style.opacity = opacity;
+    this.clientInfo.style.display = display;
+  }
+
+  /*Charger station */
   loadStation() {
     fetch(`https://api.jcdecaux.com/vls/v1/stations?contract=${this.city}&apiKey=${this.apiKey}`)
       .then(response => response.json())
       .then(data => {
         /*parcourir tableau */
         data.forEach(station => {
-
           let latitude = station.position.lat;
           let longitude = station.position.lng;
           //Nom de la station
@@ -51,8 +66,6 @@ class LeafletMap {
           let availableBikeStands = station.available_bike_stands;
           //Nombre de vélos disponibles
           let availableBikes = station.available_bikes;
-          //Nombre de supports à vélo totaux
-          // let bikeStands = station.bike_stands;
 
           //Paramètrage des markers
           const LeafIcon = L.Icon.extend({
@@ -101,14 +114,14 @@ class LeafletMap {
 
           //Si la station est ouverte ET qu'il y a au moins 1 vélo de dispo alors le formulaire apparait
           this.marker.addEventListener('click', () => {
+            console.log('ok');
             sessionStorage.setItem('stationName', stationName);
-            this.partForm.style.display = 'block';
-            this.detailStation.style.display = 'block';
-            this.resetConfirm.style.display = 'none';
+            this.setPartForm('1', 'block');
+            this.setDetailStation('block');
+            this.setResetConfirm('none');
 
             if (status === 'OPEN' && availableBikes > 0) {
-              this.clientInfo.style.display = 'block';
-              this.clientInfo.style.opacity = '1';
+              this.setClientInfo('1', 'block');
               this.nameStation.innerHTML = stationName;
               this.addressStation.innerHTML = address;
               this.statut.innerHTML = status;
@@ -120,32 +133,10 @@ class LeafletMap {
               this.statut.innerHTML = status;
               this.dispoBikes.innerHTML = availableBikes;
               this.standsBikes.innerHTML = availableBikeStands;
-              this.clientInfo.style.display = 'none';
-              this.clientInfo.style.opacity = '0';
+              this.setClientInfo('0', 'none');
               this.statut.innerHTML = "Aucuns vélos disponibles actuellement, merci de choisir une autre station";
             }
           })
-
-
-
-        new Countdown(stationName).init();
-
-
-          // if (status === "CLOSE" || status === "OPEN" && availableBikeStands > 0 && availableBikes < 1) {
-          //   this.clientInfo.style.display='none';
-          // } else {
-          //   this.clientInfo.style.display='block'
-          // }
-          // this.marker.bindPopup(`<b> Nom de la Station </b><br> ${name} <br><b><br> Statut : ${status} </b><br><b>Adresse</b><br> ${address} </b><br><b>Nbres de places disponibles</b><br>${availableBikeStands}<br><b>Nbres de vélos disponibles</b><br> ${availableBikes} </br> Merci de choisir une autre station`);}
-          // } else {
-          //   this.marker.bindPopup(`<b> Nom de la Station </b><br> ${name} <br><b><br> Statut : ${status} </b><br><b>Adresse</b><br> ${address} </b><br><b>Nbres de places disponibles</b><br>${availableBikeStands}<br><b>Nbres de vélos disponibles</b><br> ${availableBikes} </br>`);
-          // }
-          //Affichage des Popups
-          // let complement= '';
-          //           if (status === "CLOSE" || status === "OPEN" && availableBikeStands > 0 && availableBikes < 1)
-          //               complement = `Merci de choisir une autre station`;
-
-          //           this.marker.bindPopup(`<b> Nom de la Station </b><br> ${name} <br><b><br> Statut : ${status} </b><br><b>Adresse</b><br> ${address} </b><br><b>Nbres de places disponibles</b><br>${availableBikeStands}<br><b>Nbres de vélos disponibles</b><br> ${availableBikes} </br> ${complement}`);
 
         })
       })

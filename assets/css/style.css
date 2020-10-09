@@ -76,7 +76,7 @@ body {
 }
 
 .bck-casal {
-  background-color: #2C655A;
+  background-color: #16a085;
 }
 
 .bck-toscane {
@@ -88,7 +88,7 @@ body {
 }
 
 .color-casal {
-  color: #2C655A;
+  color: #16a085;
 }
 
 .color-toscane {
@@ -124,8 +124,14 @@ body {
   font-size: 16px;
 }
 
+.font-size12 {
+  font-size: 12px;
+}
 
-/*==                                      */
+/*==          GLOBAL                     */
+.bold {
+  font-weight: bold;
+}
 
 .width100 {
   width: 100%;
@@ -183,12 +189,11 @@ header {
   width: 95px;
 }
 
-
 /* ---------------------------------------- */
 /* ==              SECTION Slider           */
 /*---------------------------------------- */
 .part-slider {
-  height: 340px;
+  height: 280px;
   background-image: url("../images/autumn-studio-partie1.jpg");
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -208,74 +213,131 @@ header {
 /* ==         SLIDER          */
 
 #slider {
-  width: 80%;
-  height: 150px;
+  height: 130px;
   padding-top: 20px;
+  width: 80%;
 }
 
 .slide-picture {
   opacity: 0;
+  width: 100%;
+  height: 150px;
 }
 
 .slide-active {
   opacity: 1;
 }
 
-.first-picture,
-.second-picture,
-.third-picture,
-.fourth-picture,
-.last-picture {
-  height: 140px;
-  transition: 0.5s;
-  overflow: hidden;
-  border-radius: 10px 100px / 120px;
-  flex-direction: row;
-}
-
-.first-picture img,
-.second-picture img,
-.third-picture img,
-.fourth-picture img,
-.last-picture img {
-  width: 60%;
-  float: left;
-}
-
-.first-picture p,
-.second-picture p,
-.third-picture p,
-.fourth-picture p,
-.last-picture p {
-  width: 40%;
-  height: 140px;
+.picture-slider {
+  width: 65%;
+  height: 115px;
+  background-color: #16a085;
+  border-radius: 15% 0% 0% 0%;
   margin: 0;
-  padding-top: 40px;
+  display: flex;
 }
 
+.img1,
+.img2,
+.img3,
+.img4,
+.img5,
+.img6 {
+  width: 90%;
+  height: auto;
+  margin: auto;
+}
+
+.text-slide {
+  width: 35%;
+  height: 115px;
+  display: flex;
+  border-radius: 0% 0% 15% 0%;
+}
+
+.text-slide p {
+  margin: auto;
+}
 
 /* ==       Button-slider     */
 
 .button-slider {
-  justify-content: space-around;
-  width: 95px;
-  margin-top: 15px;
+  justify-content: space-between;
+  width: 80%;
+}
+
+#play i,
+#previous i,
+#next i,
+#break i {
+  width: 35px;
+  height: 35px;
+  border-radius: 35px;
 }
 
 #play,
 #previous,
-#next {
+#next,
+#break {
+  font-size: 35px;
+  text-align: center;
+  text-transform: uppercase;
   cursor: pointer;
+  background-color: #16a085;
+  border: none;
+  color: #fff;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  transition-duration: 0.4s;
+  box-shadow: 0 5px 15px #193047;
+  border-radius: 35px;
+}
+
+#play :hover,
+#previous:hover,
+#next:hover,
+#break:hover {
+  background: #fff;
+  box-shadow: 0px 2px 10px 5px #1abc9c;
+  color: #E7B23E;
+}
+
+#play::after,
+#previous::after,
+#next::after,
+#break::after {
+  content: "";
+  background: #1abc9c;
+  display: block;
+  position: absolute;
+  opacity: 0;
+  transition: all 0.8s
+}
+
+#play:active:after,
+#previous:active:after,
+#next:active:after,
+#break:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s
+}
+
+#play:active:focus,
+#previous:active:focus,
+#next:active:focus,
+#break:active:focus {
+  outline: 0;
 }
 
 #previous {
   right: 200px;
-  padding-right: 60px;
 }
 
 #next {
   left: 200px;
-  padding-left: 60px;
 }
 
 #slider:hover #previous,
@@ -299,11 +361,13 @@ header {
 
 .part-infos ul {
   width: 66%;
-  margin: auto;
+
 }
 
 .part-infos ul li {
   height: 45px;
+  align-items: center;
+  justify-content: center;
 }
 
 .part-infos li img {
@@ -312,43 +376,47 @@ header {
 }
 
 /* ---------------------------------------- */
-/* ==              SECtion MAP             */
+/* ==              Section MAP             */
 /*---------------------------------------- */
 
 /*== Part-Map   */
 .part-map {
   height: 500px;
-  margin-bottom: 20px;
 }
 
 /*==    Map     */
-
 #mapid {
   height: 400px;
   width: 80%;
   top: 50px;
 }
+
 /* ---------------------------------------- */
 /* ==              FORMULAIRE              */
 /*---------------------------------------- */
+#details-station p {
+  margin-bottom: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#name-station,
+#address,
+#statut,
+#dispo-bikes,
+#stands-bikes {
+  margin-top: 0;
+}
+
 #form {
   flex-direction: column;
   padding-top: 20px;
   margin-bottom: 20px;
 }
 
-/* #form p {
-  margin-top: 0;
-  margin-bottom: 5px;
-  text-align: center;
-
-} */
-
-#button-form {
-  margin-top: 20px;
-  padding: 10px 10px;
+#submit {
+  margin: auto;
+  margin-top: 15px;
 }
-
 
 /* ---------------------------------------- */
 /* ==                 CANVAS               */
@@ -360,6 +428,7 @@ header {
 
 #canvas-form h2 {
   width: 250px;
+  margin-top: 20px;
 }
 
 #canvas {
@@ -369,74 +438,88 @@ header {
   margin-top: 0px;
 }
 
-
-#buttons-canvas {
-  /**none =>permet de cacher les boutons si le canvas est vide*/
+#buttons-set-canvas {
   justify-content: space-around;
-  padding-top: 20px;
 }
 
+/*--BUTTON --*/
+#button-form,
+#button-canvas,
+#retry,
 #submit,
-#retry {
-  padding: 10px 10px;
-}
-
-/** Effet button **/
-
-#button-form,#button-canvas, #retry { 
-  background-color: #66A182; 
-    text-align: center;
-    width: 120px;
-    cursor: pointer;
-    margin: 5px;
-}
-
-#button-form,#button-canvas, #retry {
-  color: #FFF;
-  transition: all 0.5s;
+#reset-reservation {
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: 10px;
   position: relative;
+  background-color: #16a085;
+  border: none;
+  color: #fff;
+  padding: 5px;
+  width: 100px;
+  text-align: center;
+  transition-duration: 0.4s;
+  overflow: hidden;
+  box-shadow: 0 5px 15px #193047;
+  border-radius: 4px;
+  margin-top: 15px;
+  margin-right: 5px;
 }
-#button-form::before,#button-canvas::before, #retry::before {
-  content: '';
+
+#button-form:hover,
+#button-canvas:hover,
+#retry:hover,
+#submit:hover,
+#reset-reservation:hover {
+  background: #fff;
+  box-shadow: 0px 2px 10px 5px #1abc9c;
+  color: #000;
+}
+
+#button-form::after,
+#button-canvas::after,
+#retry::after,
+#submit::after,
+#reset-reservation::after {
+  content: "";
+  background: #1abc9c;
+  display: block;
   position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  background-color: rgba(255,255,255,0.1);
-  transition: all 0.3s;
-}
-#button-form:hover::before,#button-canvas:hover::before, #retry:hover::before {
-  opacity: 0 ;
-  transform: scale(0.5,0.5);
-}
-#button-form::after,#button-canvas::after, #retry::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
   opacity: 0;
-  transition: all 0.3s;
-  border: 1px solid rgba(255,255,255,0.5);
-  transform: scale(1.2,1.2);
+  transition: all 0.8s
 }
-#button-form::after,#button-canvas:hover::after, #retry:hover::after {
+
+#button-form:active:after,
+#button-canvas:active:after,
+#retry:active:after,
+#submit:active:after,
+#reset-reservation:after {
+  padding: 0;
+  margin: 0;
   opacity: 1;
-  transform: scale(1,1);
+  transition: 0s
 }
 
-/**== Timer **/
+#button-canvas:focus,
+#button-canvas:focus,
+#retry:focus,
+#submit:focus,
+#reset-reservation:focus {
+  outline: 0;
+}
 
-/* #timer {
-  opacity: 0;
-} */
+/* ---------------------------------------- */
+/* ==              TIMER                   */
+/*---------------------------------------- */
 
 #reset-reservation {
   width: 75px;
+  margin: auto;
 }
 
-#reset-confirm {
-  font-size: 24px;
+#timer p {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* --------------------------------------- */
@@ -452,9 +535,8 @@ footer h2 {
   margin-bottom: 5px;
 }
 
-ul {
-  padding-left: 0px;
-  margin: 0;
+footer ul {
+  padding: 0;
 }
 
 li {
@@ -471,260 +553,440 @@ li a {
 /* ==               MEDIAS                  */
 /*                  QUERIES                 */
 /*---------------------------------------- */
-
 /* ---------------------------------------- */
 /* ==              MEDIA 1                 */
 /*---------------------------------------- */
-@media screen and (min-width: 470px) {
+@media screen and (min-width: 340px) {
 
-  /* ---------------------------------------- */
+  /**Slider */
+  .part-slider {
+    height: 300px;
+  }
+
+  #slider {
+    padding-bottom: 20px;
+  }
+
+  .picture-slider {
+    height: 130px;
+  }
+
+  .text-slide {
+    height: 130px;
+  }
+
+  /**Infos Stations */
+  .part-infos ul {
+    width: 50%;
+  }
+}
+
+/* ---------------------------------------- */
+/* ==              MEDIA 2                  */
+/*---------------------------------------- */
+@media screen and (min-width: 425px) {
+
+
   /* ==              SECTION Slider           */
-  /*---------------------------------------- */
+
+  .part-slider {
+    height: 360px;
+  }
+
+  .picture-slider {
+    height: 160px;
+  }
+
+  .text-slide {
+    height: 160px;
+    font-size: 20px;
+  }
+
+  .button-slider {
+    padding-top: 40px;
+  }
+
+  #play i,
+  #previous i,
+  #next i,
+  #break i {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+  }
+
+  #play,
+  #previous,
+  #next,
+  #break {
+    font-size: 50px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+  }
+}
+
+/* ---------------------------------------- */
+/* ==              MEDIA 3                 */
+/*---------------------------------------- */
+@media screen and (min-width: 575px) {
+
+  .part-text p {
+    font-size: 30px;
+  }
+
+  .part-slider {
+    height: 450px;
+  }
+
+  #slider {
+    height: 200px;
+    padding-bottom: 22px;
+  }
+
+  .slide-picture {
+    height: 200px;
+  }
+
+  .picture-slider {
+    height: 200px;
+  }
+
+  .text-slide {
+    height: 200px;
+  }
+
+  .part-infos ul {
+    width: 50%;
+  }
+}
+
+/* ---------------------------------------- */
+/* ==              MEDIA 4                 */
+/*---------------------------------------- */
+/* @media screen and (min-width: 695px) {
+
   .part-slider {
     height: 500px;
   }
 
-  .part-text {
-    padding-top: 40px;
-  }
-
   #slider {
-    height: 50%;
-    padding-top: 40px;
+    height: 200px;
+    padding-bottom: 22px;
   }
 
-  .first-picture,
-  .second-picture,
-  .third-picture,
-  .fourth-picture,
-  .last-picture {
-    width: 100%;
-    height: 80%;
+  .slide-picture {
+    height: 200px;
   }
 
-  .first-picture p,
-  .second-picture p,
-  .fourth-picture p,
-  .third-picture p,
-  .last-picture p {
-    height: 100%;
-    font-size: 26px;
-    padding-top: 18%;
+  .picture-slider {
+    height: 240px;
   }
 
-  .second-picture p,
-  .fourth-picture p {
-    padding-top: 12%;
+  .text-slide {
+    height: 215px;
   }
-
-
-  /* --------------------------------------- */
-  /* ==        Section Part-Infos            */
-  /*---------------------------------------- */
 
   .part-infos ul {
-    padding-left: 30%;
+    width: 30%;
+  }
+} */
+
+/* ---------------------------------------- */
+/* ==              MEDIA 5                 */
+/*---------------------------------------- */
+@media screen and (min-width: 768px) {
+
+  /* ==             HEADER                   */
+  header {
+    height: 150px;
+  }
+
+  #logo {
+    width: 115px;
+  }
+
+  #logo img {
+    height: auto;
+  }
+
+  #title {
+    width: 120px;
+    font-size: 28px;
+  }
+
+  /* ==              SECTION Slider           */
+
+  .part-text p {
+    width: 250px;
+    font-size: 35px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+  }
+
+
+  .part-slider {
+    height: 520px;
+  }
+
+  .picture-slider {
+    height: 260px;
+  }
+
+  .text-slide {
+    height: 260px;
+    font-size: 36px;
+  }
+
+  .button-slider {
+    padding-top: 80px;
+  }
+
+  /* ==          Section Part-Infos          */
+  .part-infos {
+    height: 260px;
+  }
+
+  .part-infos h2 {
+    font-size: 35px;
+  }
+
+  .part-infos ul li p {
+    font-size: 20px;
+  }
+
+
+  /*== form */
+  #content-map-form-canvas {
+    display: flex;
+    border-right: 3px solid #E7B23E;
+  }
+
+  #part-form {
+    display: none;
+    margin: auto;
+    width: 40%;
+    text-align: center;
+  }
+
+  /*==   Canvas     */
+
+  #canvas-form {
+    width: 40%;
+    margin: auto;
+    text-align: center;
+    flex-direction: column;
+  }
+
+  #buttons-set-canvas {
+    justify-content: center;
+  }
+
+  /*==   Timer     */
+  #timer {
+    margin-bottom: 10px;
+  }
+
+  /* ==              FOOTER                  */
+  footer {
+    height: 180px;
+    margin-top: 0;
+  }
+
+  footer h2 {
+    height: 30px;
+    font-size: 26px;
+  }
+
+  ul {
+    height: 65px;
+  }
+
+  li {
+    height: 25px;
+  }
+
+  li a {
+    font-size: 24px;
+  }
+
+  footer p {
+    font-size: 20px;
   }
 }
 
-  /* ---------------------------------------- */
-  /* ==              MEDIA 2                 */
-  /*---------------------------------------- */
-  @media screen and (min-width: 575px) {
+/* ---------------------------------------- */
+/* ==              MEDIA 6                 */
+/*---------------------------------------- */
+@media screen and (min-width: 900px) {
 
-    .first-picture p,
-    .third-picture p,
-    .last-picture p {
-      padding-top: 15%;
-    }
-
-    .second-picture p,
-    .fourth-picture p {
-      padding-top: 10%;
-    }
+  /**Slider**/
+  .part-slider {
+    height: 630px;
   }
 
-  /* ---------------------------------------- */
-  /* ==              MEDIA 3                 */
-  /*---------------------------------------- */
-  @media screen and (min-width: 695px) {
-
-    .first-picture p,
-    .third-picture p,
-    .last-picture p {
-      padding-top: 12%;
-    }
-
-    .second-picture p,
-    .fourth-picture p {
-      padding-top: 8%;
-    }
+  .part-text p {
+    margin-top: 20px;
   }
 
-  /* ---------------------------------------- */
-  /* ==              MEDIA 4                 */
-  /*---------------------------------------- */
-  @media screen and (min-width: 768px) {
-
-    /* ==             HEADER                   */
-    header {
-      height: 150px;
-    }
-
-    #logo {
-      width: 115px;
-    }
-
-    #logo img {
-      height: auto;
-    }
-
-    #title {
-      width: 120px;
-      font-size: 28px;
-    }
-
-    /* ==              SECTION Slider           */
-    .part-slider {
-      height: 600px;
-    }
-
-    .part-text p {
-      width: 250px;
-      font-size: 35px;
-    }
-
-    /* ==         SLIDER          */
-    .first-picture p,
-    .second-picture p,
-    .third-picture p,
-    .fourth-picture p,
-    .last-picture p {
-      font-size: 36px;
-    }
-
-    /* ==       Button-slider     */
-    #play,
-    #break,
-    #previous,
-    #next {
-      font-size: 50px;
-    }
-
-    /* ==          Section Part-Infos          */
-    .part-infos {
-      height: 300px;
-    }
-
-    .part-infos h2 {
-      font-size: 35px;
-    }
-
-    .part-infos ul {
-      padding-left: 35%;
-    }
-
-    .part-infos ul li {
-      font-size: 25px;
-    }
-
-    /*== MAP */
-    /* .part-map {
-      width: 60%;
-    }
-    #mapid {
-      width: 80%;
-    } */
-
-    /*== form */
-    #content-map-form-canvas {
-      display: flex;
-    }
-    #part-form {
-      display: none;
-      margin: auto;
-      width: 40%;
-      text-align: center;
-    }
-    
-
-    /*==   Canvas     */
-
-    #canvas-form {
-      width: 40%;
-      margin: auto;
-      text-align: center;
-      flex-direction: column;
-    }
-    #buttons-canvas {
-      justify-content: center;
-    }
-
-    #submit {
-      margin-right: 70px;
-    }
-
-    /* ==              FOOTER                  */
-    footer {
-      height: 180px;
-    }
-
-    footer h2 {
-      height: 30px;
-      font-size: 26px;
-    }
-
-    ul {
-      height: 65px;
-    }
-
-    li {
-      height: 25px;
-    }
-
-    li a {
-      font-size: 24px;
-    }
-
-    footer p {
-      font-size: 20px;
-    }
-  }
-/* 
-  /* ---------------------------------------- */
-  /* ==              MEDIA 5                 */
-  /*---------------------------------------- */
-  @media screen and (min-width: 900px) {
-    .part-slider {
-      height: 700px;
-    }
+  #slider {
+    height: 200px;
   }
 
-  /* ---------------------------------------- */
-  /* ==              MEDIA 6                 */
-  /*---------------------------------------- */
-  @media screen and (min-width: 1150px) {
-    .part-slider {
-      height: 900px;
-    }
-
-    .part-text {
-      padding-top: 80px;
-    }
-
-    #slider {
-      padding-top: 80px;
-    }
-
-    .first-picture p,
-    .second-picture p,
-    .fourth-picture p,
-    .third-picture p,
-    .last-picture p {
-      font-size: 50px;
-    }
-
-    .part-infos ul {
-      padding-left: 40%;
-    }
+  .slide-picture {
+    height: 200px;
   }
+
+  .picture-slider {
+    height: 300px;
+  }
+
+  .text-slide {
+    height: 300px;
+  }
+
+  .button-slider {
+    padding-top: 130px;
+  }
+
+  /** Part Info Station **/
+  .part-infos {
+    height: 360px;
+  }
+
+  .part-infos h2 {
+    font-size: 40px;
+  }
+
+  .part-infos ul {
+    width: 50%;
+  }
+
+  .part-infos ul li {
+    height: 65px;
+  }
+
+  .part-infos ul li img {
+    width: 50px;
+    height: auto;
+  }
+
+  .part-infos ul li p {
+    font-size: 30px;
+  }
+}
+
+/* ---------------------------------------- */
+/* ==              MEDIA                  */
+/*---------------------------------------- */
+@media screen and (min-width: 1024px) {
+  .picture-slider {
+    height: 330px;
+  }
+
+  .text-slide {
+    height: 330px;
+    font-size: 42px;
+  }
+}
+
+/* ---------------------------------------- */
+/* ==              MEDIA 8                 */
+/*---------------------------------------- */
+@media screen and (min-width: 1150px) {
+  .part-slider {
+    height: 800px;
+  }
+
+  .part-text p {
+    font-size: 40px;
+    width: 360px;
+  }
+
+  .picture-slider {
+    height: 370px;
+  }
+
+  .text-slide {
+    font-size: 50px;
+    height: 370px;
+  }
+
+  .button-slider {
+    padding-top: 180px;
+  }
+
+  .img1,
+  .img2,
+  .img3,
+  .img4,
+  .img5,
+  .img6 {
+    width: 80%;
+  }
+
+  #play i,
+  #previous i,
+  #next i,
+  #break i {
+    width: 70px;
+    height: 70px;
+    border-radius: 70px;
+  }
+
+  #play,
+  #previous,
+  #next,
+  #break {
+    font-size: 70px;
+    width: 70px;
+    height: 70px;
+    border-radius: 70px;
+  }
+
+  .part-infos ul {
+    width: 29%;
+  }
+}
+
+/* ---------------------------------------- */
+/* ==              MEDIA 9                 */
+/*---------------------------------------- */
+@media screen and (min-width: 1300px) {
+  .picture-slider {
+    height: 418px;
+  }
+
+  .text-slide {
+    height: 418px;
+    font-size: 50px;
+  }
+
+  .button-slider {
+    padding-top: 260px;
+  }
+}
+
+/* ---------------------------------------- */
+/* ==              MEDIA 10                 */
+/*---------------------------------------- */
+@media screen and (min-width: 1900px) {
+
+  .part-slider {
+    height: 1048px;
+  }
+
+  .picture-slider {
+    height: 625px;
+  }
+
+  .text-slide {
+    height: 625px;
+    font-size: 90px;
+  }
+
+  .button-slider {
+    padding-top: 470px;
+  }
+
+}
