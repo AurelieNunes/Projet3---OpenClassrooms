@@ -1,12 +1,13 @@
 class LeafletMap {
-  constructor() {
+  constructor(partForm) {
     this.map = '';
     this.latCity = 43.6;
     this.lngCity = 1.43;
     this.apiKey = 'abd66f165c4efa8460a47fb0ec73559fe93eb879';
     this.city = 'toulouse';
     this.marker = '';
-    this.partForm = document.getElementById('part-form');
+    this.groupMarkers = new L.MarkerClusterGroup();
+    this.partForm = partForm;
     this.nameStation = document.getElementById('name-station');
     this.addressStation = document.getElementById('address');
     this.detailStation = document.getElementById('details-station');
@@ -20,18 +21,16 @@ class LeafletMap {
   }
 
   /*Fonction Charger map*/
-
   initMap() {
-    this.map = L.map('mapid').setView([this.latCity, this.lngCity], 13);
-
+    this.map = L.map('mapid').setView([this.latCity, this.lngCity],13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
   }
 
-  setPartForm = (opacity, display) => {
-    this.partForm.style.opacity = opacity;
-    this.partForm.style.display = display;
+  setPartForm =(opacity,display)=>{
+    this.partForm.style.opacity=opacity;
+    this.partForm.style.display=display;
   }
 
   setDetailStation = (display) => {
@@ -52,6 +51,7 @@ class LeafletMap {
     fetch(`https://api.jcdecaux.com/vls/v1/stations?contract=${this.city}&apiKey=${this.apiKey}`)
       .then(response => response.json())
       .then(data => {
+        console.log(data)
         /*parcourir tableau */
         data.forEach(station => {
           let latitude = station.position.lat;
@@ -66,7 +66,6 @@ class LeafletMap {
           let availableBikeStands = station.available_bike_stands;
           //Nombre de vélos disponibles
           let availableBikes = station.available_bikes;
-
           //Paramètrage des markers
           const LeafIcon = L.Icon.extend({
             options: {
@@ -79,44 +78,48 @@ class LeafletMap {
           //Personnalisation des markers
           const newIconGreen = new LeafIcon({
             iconUrl: 'assets/images/marker_green.png'
-          })
+          });
           const newIconRed = new LeafIcon({
             iconUrl: 'assets/images/marker_red.png'
-          })
+          });
           const newIconBlue = new LeafIcon({
             iconUrl: 'assets/images/marker_blue.png'
-          })
+          });
           const newIconOrange = new LeafIcon({
             iconUrl: 'assets/images/marker_orange.png'
-          })
+          });
 
           //Conditions différents markers
-          if (status === 'OPEN' && availableBikeStands > 1 && availableBikes > 1) {
+          //Si la station est ouverte && que Nbre supports à vélo est sup à 1 et vélo dispo sup à 1 
+          if (status === 'OPEN' && availableBikeStands > 0 && availableBikes > 0) {
             this.marker = L.marker([latitude, longitude], {
               icon: newIconGreen
-            }).addTo(this.map)
+            })
+            this.groupMarkers.addLayer(this.marker)
           } else if (status === 'CLOSE') {
             this.marker = L.marker([latitude, longitude], {
               icon: newIconRed
-            }).addTo(this.map)
+            })
+            this.groupMarkers.addLayer(this.marker)
           } else if (status === "OPEN" && availableBikeStands > 0 && availableBikes < 1) {
             //Si la station est ouverte ET que Nbre de supports de vélo >0 ET que le Nbre de vélo dispo est <1 alors marqueur orange 
             this.marker = L.marker([latitude, longitude], {
               icon: newIconOrange
-            }).addTo(this.map)
+            })
+            this.groupMarkers.addLayer(this.marker)
           }
           //Si la station est ouverte ET que Nbre de supports de vélo <1 ET que le Nbre de vélo dispo est >0 alors marqueur bleu
           else if (status === "OPEN" && availableBikeStands < 1 && availableBikes > 0) {
             this.marker = L.marker([latitude, longitude], {
               icon: newIconBlue
-            }).addTo(this.map)
+            })
+            this.groupMarkers.addLayer(this.marker)
           }
 
           //Si la station est ouverte ET qu'il y a au moins 1 vélo de dispo alors le formulaire apparait
-          this.marker.addEventListener('click', () => {
-            console.log('ok');
+          this.marker.addEventListener('click', ()=>{
             sessionStorage.setItem('stationName', stationName);
-            this.setPartForm('1', 'block');
+            this.setPartForm('1','block');
             this.setDetailStation('block');
             this.setResetConfirm('none');
 
@@ -137,9 +140,8 @@ class LeafletMap {
               this.statut.innerHTML = "Aucuns vélos disponibles actuellement, merci de choisir une autre station";
             }
           })
-
         })
+        this.map.addLayer(this.groupMarkers);
       })
   }
 }
-const leafletMap = new LeafletMap()

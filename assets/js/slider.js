@@ -1,6 +1,7 @@
 class Slider {
     constructor(){
         /*Récupération du tableau (Nodelist)*/
+        //recupération du conteneur
         this.slides=document.querySelectorAll(".slide-picture");
         this.totalSlides = this.slides.length;
         /*Compteur du slide*/
@@ -43,6 +44,8 @@ class Slider {
 
     /*Automatisation de la lecture */
     start() {
+        this.displayButton(this.break, 'block');
+        this.displayButton(this.play,'none');
         this.interval = setInterval(() => {
             this.changeSlideNext(+1)
         }, 5000);
@@ -50,7 +53,13 @@ class Slider {
 
     stop() {
         clearInterval(this.interval)
-    }
+        this.displayButton(this.break, 'none');
+        this.displayButton(this.play,'block');
+    };
+
+    displayButton(button,style){
+        button.style.display=style;
+    };
 
     /* Evenement */
     event() {
@@ -59,24 +68,31 @@ class Slider {
         //Bouton Pause
         this.break.addEventListener('click', () => {
             this.stop();
-        })
+        });
 
         //Bouton Play
         this.play.addEventListener('click', () => {
             this.start();
-        })
+        });
+
+        //Aller au slider précedent
+        this.previous.addEventListener('click', () => {
+                this.changeSlidePrevious();
+        });
+
+        //Aller au slider suivant
+        this.next.addEventListener('click', ()=>{
+            this.changeSlideNext();
+        });
 
         //Evenement touche clavier
-
         document.addEventListener('keyup', (event) => {
-            if (event.keyCode === 37) {
+            if (event.key === 37) {
                 this.changeSlidePrevious();
             }
-            if (event.keyCode === 39) {
+            if (event.key === 39) {
                 this.changeSlideNext();
             }
-        })
+        });
     }
 }
-
-const slider = new Slider();
